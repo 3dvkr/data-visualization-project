@@ -1,3 +1,5 @@
+import {v4} from 'uuid';
+
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
@@ -41,7 +43,7 @@ export function Controls({ refetch, setWindow, forecast }: ControlsProps) {
         Refetch
       </Button> */}
       {sizes.map((element) => (
-        <Button variant="contained" onClick={(event) => handleClick(event, element)}>
+        <Button key={v4()} variant="contained" onClick={(event) => handleClick(event, element)}>
           {element}
         </Button>
       ))}
