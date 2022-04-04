@@ -50,22 +50,20 @@ export function MainChart({
   useEffect(() => {
     const slice = data.map((e, i) => {
       if (i === 1) {
-        const potentialLastVisibleTime=data[0][window[0]].time_value + 1000 * 60 * window[1];
-        const firstForecastTime = data[1][0].time_value
+        const potentialLastVisibleTime =
+          data[0][window[0]].time_value + 1000 * 60 * window[1];
+        const firstForecastTime = data[1][0].time_value;
         // console.log("FORECAST DATA IN WINDOW? \n window end time: ", potentialLastVisibleTime, "\n First forecast time", firstForecastTime )
-        if (
-          potentialLastVisibleTime >
-          firstForecastTime
-        ) {
+        if (potentialLastVisibleTime > firstForecastTime) {
           return e.slice(window[0], window[1]);
         } else {
-          return null
+          return null;
         }
       } else {
         return e.slice(window[0], window[1]);
       }
     });
-    slice[1] === null && slice.pop()
+    slice[1] === null && slice.pop();
     setVisibleData(slice as RechartData);
     // console.log("visible data: ", visibleData);
     return () => {};
@@ -100,11 +98,13 @@ export function MainChart({
   }, [isFetching, isForecasting]);
 
   return (
-    <Grid container sx={{ marginTop: "calc(100px + 3vw)" }}>
-      <Grid item sm={2} />
+    <Grid
+      container
+      sx={{ marginTop: "calc(100px + 3vw)", justifyContent: "center" }}
+    >
       <Grid item xs={12} sm={8}>
         <Paper>
-          <Typography>
+          <Typography variant="h4" component="h2">
             {chart.measurement} {chart.moid}
           </Typography>
           <ResponsiveContainer height={300}>
@@ -114,19 +114,22 @@ export function MainChart({
               margin={{
                 top: 50,
                 right: 30,
-                left: 100,
+                left: 60,
                 bottom: 30,
               }}
-              
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
-              tickFormatter={(date)=>{
-                const dateObj = new Date(date)
-                const day = dateObj.getDay()
-                const hour = dateObj.getHours().toString().padStart(2, "0")
-                const minute = dateObj.getMinutes().toString().padStart(2, "0")
-                return`${day}—${hour}:${minute}`}}
+                tickFormatter={(date) => {
+                  const dateObj = new Date(date);
+                  const day = dateObj.getDay();
+                  const hour = dateObj.getHours().toString().padStart(2, "0");
+                  const minute = dateObj
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, "0");
+                  return `${day}—${hour}:${minute}`;
+                }}
                 type="number"
                 domain={["auto", "auto"]}
                 dataKey="time_value"
@@ -140,6 +143,7 @@ export function MainChart({
                   value: chart.field,
                   angle: -90,
                   position: "insideLeft",
+                  offset: -30,
                 }}
               />
               <Legend layout="vertical" verticalAlign="middle" align="right" />

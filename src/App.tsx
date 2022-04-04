@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { Header, ChartsContainer, NewChartForm } from "./components";
-import { Header, ChartsContainer } from "./components";
+import { Header, ChartsContainer, Info } from "./components";
 import "./App.css";
 import { AddChartInput, getFluxQueryOptions } from "./types";
 import Button from "@mui/material/Button";
@@ -47,6 +47,7 @@ function App() {
         <NewChartForm onSubmit={handleAddChart} />
       )} */}
       <ChartsContainer charts={charts} />
+      <Info />
     </div>
   );
 }
